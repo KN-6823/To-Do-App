@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List Application</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="backdrop"></div>
+    <div class="todo-app">
+      <h2>To-Do List<img src="images/notes.png"></h2>
+      <button id="add-task" onclick="newTask()">+</button>
+      <div id="task-container" class="task-container">
+        <span class="cancel-icon" onclick="closeTaskContainer()">&#x2716;</span>
+        <h2>Add Task</h2>
+        <input type="text" class="row" id="input-box" placeholder="Enter your task here">
+        <div class="time-inputs">
+          <label for="start-time">Start:</label>
+          <input type="time" id="start-time">
+          <label for="end-time">End:</label>
+          <input type="time" id="end-time">
+        </div>
+        <button onclick="addTask()">ADD</button>
+      </div>
+      <!-- <div class="row">
+        <input type="text" id="input-box" placeholder="Enter your task here">
+        <button onclick="addTask()">ADD</button>
+      </div> -->
+      <ul id="list-container"></ul>
+    </div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
