@@ -4,6 +4,7 @@ const startTimeInput = document.getElementById("start-time");
 const endTimeInput = document.getElementById("end-time");
 const taskContainer = document.getElementById("task-container");
 const backdrop = document.querySelector(".backdrop");
+const noTaskImage = document.getElementById("no-task-image");
 
 function addTask() {
   if (inputBox.value === "" || startTimeInput.value === "" || endTimeInput.value === "") {
@@ -33,7 +34,10 @@ function addTask() {
 
     // Calculate countdown time and start timer
     let countdownTime = calculateCountdown(startTime, endTime);
-    startTimer(countdownTime, timerElement, startTime); // Corrected parameter name here
+    startTimer(countdownTime, timerElement, startTime, li); // Pass the task item to the startTimer function
+
+    // Hide the no-task image when a task is added
+    noTaskImage.style.display = "none";
   }
 
   inputBox.value = "";
@@ -41,6 +45,7 @@ function addTask() {
   endTimeInput.value = "";
   saveTask();
 }
+
 
 function generateLightGradient() {
   let r1 = Math.floor(Math.random() * 155) + 100; // Adjusted range for lighter shades
@@ -78,7 +83,7 @@ function getCurrentTime() {
   return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 }
 
-function startTimer(duration, timerElement, startTime) { // Corrected parameter name here
+function startTimer(duration, timerElement, startTime, taskItem) {
   let intervalId = setInterval(function () {
     // Get current time in seconds
     let currentTime = new Date();
@@ -90,15 +95,18 @@ function startTimer(duration, timerElement, startTime) { // Corrected parameter 
         currentMinutes === parseInt(startTime.split(":")[1]) &&
         currentSeconds === 0) {
       console.log("Timer started for task: ", getCurrentTime());
-      alert("Timer started for task: " + timerElement.parentElement.innerText.split("\n")[0]); // Corrected variable name here
+      alert("Timer started for task: " + taskItem.innerText.split("\n")[0]);
       clearInterval(intervalId); // Stop the interval if start time is reached
       let timer = duration / 1000; // Convert milliseconds to seconds
       let countdownId = setInterval(function () {
         if (timer < 0) {
           clearInterval(countdownId);
-          // Show time-over popup
           console.log("Timer over: ", getCurrentTime());
-          alert("Time over for task: " + timerElement.parentElement.innerText.split("\n")[0]); // Corrected variable name here
+          alert("Time over for task: " + timerElement.parentElement.innerText.split("\n")[0]);
+          timerElement.innerText = "Time over"; // Show "Time over" message
+          taskItem.classList.add("time-over"); // Add a class to mark the task as time over
+          // Store timer state in local storage
+          localStorage.setItem("timeOverTask", taskItem.id);
           return;
         }
         timerElement.innerText = formatTimeRemaining(timer);
@@ -114,7 +122,7 @@ function startTimer(duration, timerElement, startTime) { // Corrected parameter 
   let remainingTime = parseInt(localStorage.getItem("remainingTime"));
   let storedStartTime = localStorage.getItem("startTime");
   if (!isNaN(remainingTime) && storedStartTime === startTime) {
-    startTimer(remainingTime * 1000, timerElement, startTime); // Restart timer with remaining time
+    startTimer(remainingTime * 1000, timerElement, startTime, taskItem); // Restart timer with remaining time
   }
 }
 
@@ -148,17 +156,34 @@ showTask();
 function newTask() {
   taskContainer.style.display = "block";
   backdrop.style.display = "block";
+  localStorage.setItem("taskContainerState", "open"); // Store the state in local storage
 }
 
 function closeTaskContainer() {
   taskContainer.style.display = "none";
   backdrop.style.display = "none";
+  localStorage.setItem("taskContainerState", "closed"); // Store the state in local storage
 }
 
-window.addEventListener("beforeunload", function (e) {
-  // Clear timer-related data from local storage when leaving the page
-  localStorage.removeItem("remainingTime");
-  localStorage.removeItem("startTime");
+// Check local storage for the task container state on page load
+window.addEventListener("load", function () {
+  const taskContainerState = localStorage.getItem("taskContainerState");
+  if (taskContainerState === "open") {
+    taskContainer.style.display = "block";
+    backdrop.style.display = "block";
+  } else {
+    taskContainer.style.display = "none";
+    backdrop.style.display = "none";
+  }
+
+  // Check if there's a time-over task in local storage and mark it accordingly
+  const timeOverTaskId = localStorage.getItem("timeOverTask");
+  if (timeOverTaskId) {
+    const timeOverTask = document.getElementById(timeOverTaskId);
+    if (timeOverTask) {
+      timeOverTask.classList.add("time-over");
+    }
+  }
 });
 
 document.getElementById("add-task").addEventListener("click", newTask);
