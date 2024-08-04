@@ -9,7 +9,7 @@ A simple To-Do application built with HTML, CSS, JavaScript, and Bootstrap. Mana
 - Set timers for tasks with notifications
 - Responsive design
 
-<p align="center">
+<p>
   <img src="https://github.com/user-attachments/assets/33c4cc16-e507-40b2-803d-885fa3333af8" alt="Todoapp1" width="600" style="margin: 30px;"/>
 </p>
 <div style="display: flex; justify-content: center;">
