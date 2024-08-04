@@ -14,13 +14,10 @@ A simple To-Do application built with HTML, CSS, JavaScript, and Bootstrap. Mana
 </p>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/29b07e21-0070-442d-8d83-74354ba5b8aa" alt="Todoapp2" width="300" style="margin: 10px;"/>
-</p>
-<p align="center">
   <img src="https://github.com/user-attachments/assets/510fd771-f0c2-4cb5-9c1b-3bd2b84ee714" alt="Todoapp3" width="300" style="margin: 10px;"/>
-</p>
-<p align="center">
   <img src="https://github.com/user-attachments/assets/5e2afa5c-1240-40fb-ab6f-9bc75bf9041b" alt="Todoapp4" width="300" style="margin: 10px;"/>
 </p>
+```
 
 
 ## Clone the repository
