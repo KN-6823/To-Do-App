@@ -11,8 +11,8 @@ A simple To-Do application built with HTML, CSS, JavaScript, and Bootstrap. Mana
 - 
 
 **Clone the repository:**
-   ```bash
-   git clone [https://github.com/KN-6823/To-Do-App.git]
+
+  git clone [https://github.com/KN-6823/To-Do-App.git]
 
 ![Todoapp1](https://github.com/user-attachments/assets/33c4cc16-e507-40b2-803d-885fa3333af8)
 
