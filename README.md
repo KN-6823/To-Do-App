@@ -10,7 +10,7 @@ A simple To-Do application built with HTML, CSS, JavaScript, and Bootstrap. Mana
 - Responsive design
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/33c4cc16-e507-40b2-803d-885fa3333af8" alt="Todoapp1" width="300" style="margin: 10px;"/>
+  <img src="https://github.com/user-attachments/assets/33c4cc16-e507-40b2-803d-885fa3333af8" alt="Todoapp1" width="600" style="margin: 10px;"/>
 </p>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/29b07e21-0070-442d-8d83-74354ba5b8aa" alt="Todoapp2" width="300" style="margin: 10px;"/>
